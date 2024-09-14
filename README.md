@@ -1,4 +1,7 @@
-# EXNO2DS
+# Suriya prakash
+# 212223100055
+
+# EX 02 DS
 # AIM:
       To perform Exploratory Data Analysis on the given data set.
       
@@ -23,7 +26,111 @@ STEP 7: Use cross tabulation method to quantitatively analyze the relationship b
 STEP 8: Use heatmap method of representation to show relationships between two variables, one plotted on each axis.
 
 ## CODING AND OUTPUT
-        <<INCLUDE YOUR CODING AND OUTPUT SCREENSHOTS>>
+```
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+dt=pd.read_csv("/titanic_dataset.csv")
+dt
+```
+![alt text](1.png)
+
+```
+dt.info()
+```
+![alt text](2.png)
+
+```
+dt.set_index("PassengerId",inplace=True)
+dt.describe()
+```
+![alt text](3.png)
+
+```
+dt.nunique()
+```
+![alt text](4.png)
+
+```
+dt["Survived"].value_counts()
+per=(dt["Survived"].value_counts()/dt.shape[0]*100).round(2)
+per
+```
+![alt text](5.png)
+
+```
+sns.countplot(data=dt,x="Survived")
+```
+![alt text](6.png)
+
+```
+dt
+```
+![alt text](7.png)
+
+```
+dt.Pclass.unique()
+dt.rename(columns={'Sex':'Gender'},inplace=True)
+dt
+```
+![alt text](8.png)
+
+```
+sns.catplot(x="Gender",col="Survived",kind="count",data=dt,height=5,aspect=.7)
+```
+
+![alt text](9.png)
+
+```
+sns.catplot(x="Survived",hue="Gender",data=dt,kind="count")
+```
+
+![alt text](10.png)
+
+```
+dt.boxplot(column="Age",by="Survived")
+```
+
+![alt text](11.png)
+
+```
+sns.scatterplot(x=dt["Age"],y=dt["Fare"])
+```
+![alt text](12.png)
+
+```
+sns.jointplot(x="Age",y="Fare",data=dt)
+```
+![alt text](13.png)
+
+```
+fig,ax1=plt.subplots(figsize=(8,5))
+pt=sns.boxplot(ax=ax1,x="Pclass",y="Age",hue="Gender",data=dt)
+```
+![alt text](14.png)
+
+```
+sns.catplot(data=dt,col="Survived",x="Gender",hue="Pclass",kind="count")
+```
+![alt text](15.png)
+
+```
+numeric_data = dt.select_dtypes(include=[np.number])
+corr = numeric_data.corr()
+sns.heatmap(corr, annot=True)
+plt.show()
+```
+![alt text](16.png)
+
+```
+sns.pairplot(dt)
+```
+![alt text](17.png)
+
+
 
 # RESULT
-        <<INCLUDE YOUR RESULT HERE>>
+
+Hence performing Exploratory Data Analysis on the given data set is successfully executed.
+        
